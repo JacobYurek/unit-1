@@ -66,7 +66,27 @@ function cities(){
         //add the row's html string to the table
         $("table").append(rowHtml);
     };
+    //calls on the function addColumns defined below with the parameter of the cityPop table
+    addColumns(cityPop);
+    //calls on the function addEvents defined below
+    addEvents();
 };
 
 //call the initialize function when the document has loaded
 $(document).ready(initialize);
+
+function debugAjax(){
+	$.ajax("data/Map.geojson", {
+		dataType: "json",
+		success: debugCallback
+	});
+};
+function debugCallback(response){
+	var mydata = response;
+	newFunction(mydata);
+};
+function newFunction(mydata){
+	$(mydiv).append('GeoJSON data: ' + JSON.stringify(mydata));	
+	
+};
+$(document).ready(debugAjax);
